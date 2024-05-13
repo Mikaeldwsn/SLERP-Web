@@ -82,6 +82,23 @@ body{
 .nav-container {
     padding: 47px;
 }
+
+#shoppingCart {
+  position: relative;
+}
+
+#shoppingCart span{
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -25px;
+  left: 80%;
+  padding: 1px 5px;
+}
+
 /*hero section*/
 .hero {
     min-height: 100vh;
