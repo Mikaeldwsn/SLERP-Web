@@ -1,4 +1,4 @@
-// Toggle class active untuk hamburger menu
+// Toggle class active buat hamburger menu
 const navbarNav = document.querySelector('.navbar-nav');
 // ketika hamburger menu di klik
 document.querySelector('#hamburger-menu').onclick = () => {
@@ -40,7 +40,8 @@ let products = [
     name: 'kopi luwak',
     image: 'home.jpg',
     price: 10000,
-  }
+  },
+  
 ];
 
 let listCards = [];
@@ -83,6 +84,12 @@ function reloadCart() {
       <div>${value.name}</div>
       <div>${value.price.toLocaleString()}</div>
       <div> ${value.quantity}</div>
+      <div>
+        <button onclick="changeQuantity(${key}, ${value.quantity - 1})">-</button>
+        <div class="count">${value.quantity}</div>
+        <button onclick="changeQuantity(${key}, ${value.quantity - 1})">+</button>
+      </div>
+      
       `;
       listCard.appendChild(newDiv);
     }
@@ -91,4 +98,21 @@ function reloadCart() {
   total.innerText = totalPrice.toLocaleString();
   quantity.innerText = count;
 }
+function changeQuantity(key, quantity){
+    if(quantity == 0){
+        delete listCards[key];
+    }else{
+        listCards[key].quantity = quantity;
+        listCards[key].price = quantity * products[key].price;
+    }
+    reloadCard();
+}
+// active buat search form
+const searchForm = document.querySelector('.search-form');
+const searchBox = document.querySelector('#search-box');
 
+document.querySelector('#search-button').onclick = (e) => {
+  searchForm.classList.toggle('active');
+  searchBox.focus();
+  e.preventDefault();
+};
