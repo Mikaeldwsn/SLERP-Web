@@ -1,47 +1,46 @@
 // Toggle class active buat hamburger menu
-const navbarNav = document.querySelector('.navbar-nav');
+const navbarNav = document.querySelector(".navbar-nav");
 // ketika hamburger menu di klik
-document.querySelector('#hamburger-menu').onclick = () => {
-  navbarNav.classList.toggle('active');
+document.querySelector("#hamburger-menu").onclick = () => {
+  navbarNav.classList.toggle("active");
 };
 
 //buat list cart
-let openShoppingCart = document.querySelector('#shoppingCart');
-let body = document.querySelector('body');
-let total = document.querySelector('.total');
-let listCard = document.querySelector('.list-card');
-let quantity = document.querySelector('.quantity');
-let closeShoppingCart = document.querySelector('.close-shopping');
-let list = document.querySelector('.list');
+let openShoppingCart = document.querySelector("#shoppingCart");
+let body = document.querySelector("body");
+let total = document.querySelector(".total");
+let listCard = document.querySelector(".list-card");
+let quantity = document.querySelector(".quantity");
+let closeShoppingCart = document.querySelector(".close-shopping");
+let list = document.querySelector(".list");
 
-openShoppingCart.addEventListener('click', () => {
-  body.classList.toggle('active');
-})
+openShoppingCart.addEventListener("click", () => {
+  body.classList.toggle("active");
+});
 
-closeShoppingCart.addEventListener('click', () => {
-  body.classList.remove('active');
-})
+closeShoppingCart.addEventListener("click", () => {
+  body.classList.remove("active");
+});
 
 let products = [
   {
+    id: 0,
+    name: "kopi luwak",
+    image: "home.jpg",
+    price: 10000,
+  },
+  {
     id: 1,
-    name: 'kopi luwak',
-    image: 'home.jpg',
+    name: "kopi abc",
+    image: "home.jpg",
     price: 10000,
   },
   {
     id: 2,
-    name: 'kopi abc',
-    image: 'home.jpg',
+    name: "americano",
+    image: "home.jpg",
     price: 10000,
   },
-  {
-    id: 3,
-    name: 'kopi luwak',
-    image: 'home.jpg',
-    price: 10000,
-  },
-  
 ];
 
 let listCards = [];
@@ -60,59 +59,87 @@ let listCards = [];
 // }
 // initapp();
 
-function addToCart(key) {
-  if (listCards[key] == null) {
-    listCards[key] = products[key];
-    listCards[key].quantity = 1;
-  } else {
-    listCards[key].quantity++;
+function addToCart(id) {
+  let product = products.find((product) => product.id === id);
+
+  if (product == null) {
+    console.log(`Product with id ${id} does not exist.`);
+    return;
   }
+
+  let item = listCards.find((item) => item.id === id);
+
+  if (item == null) {
+    item = { ...product }; // Create a copy of the product to avoid modifying the original
+    item.quantity = 1;
+    item.basePrice = product.price; // Store the base price
+    listCards.push(item);
+  } else {
+    item.quantity++;
+  }
+
   reloadCart();
 }
 
 function reloadCart() {
-  listCard.innerHTML = '';
+  listCards = listCards.filter((item) => item !== undefined);
+
   let count = 0;
   let totalPrice = 0;
-  listCards.forEach((value, key) => {
+
+  // Clear the listCard before appending new items
+  listCard.innerHTML = "";
+
+  listCards.forEach((value) => {
     totalPrice += value.price * value.quantity;
     count += value.quantity;
-    if (value != null) {
-      let newDiv = document.createElement('li');
-      newDiv.innerHTML = `
-      <div><img src = "1x/${value.image}"></div>
-      <div>${value.name}</div>
-      <div>${value.price.toLocaleString()}</div>
-      <div> ${value.quantity}</div>
-      <div>
-        <button onclick="changeQuantity(${key}, ${value.quantity - 1})">-</button>
-        <div class="count">${value.quantity}</div>
-        <button onclick="changeQuantity(${key}, ${value.quantity - 1})">+</button>
-      </div>
-      
-      `;
-      listCard.appendChild(newDiv);
-    }
-    
+
+    let newDiv = document.createElement("li");
+    newDiv.innerHTML = `
+      <div><div><img src = "1x/${value.image}"></div>
+      <div class="item"><div>${value.name}</div>
+      <div>${value.price.toLocaleString()}</div></div>
+      <div class="buttons">
+      <div class="button-label"> ${value.quantity}</div>
+        <button onclick="changeQuantity(${value.id}, ${
+      value.quantity - 1
+    })">-</button>
+        <button onclick="changeQuantity(${value.id}, ${
+      value.quantity + 1
+    })">+</button>
+      </div></div>
+    `;
+    listCard.appendChild(newDiv);
   });
+
   total.innerText = totalPrice.toLocaleString();
   quantity.innerText = count;
 }
-function changeQuantity(key, quantity){
-    if(quantity == 0){
-        delete listCards[key];
-    }else{
-        listCards[key].quantity = quantity;
-        listCards[key].price = quantity * products[key].price;
-    }
-    reloadCard();
-}
-// active buat search form
-const searchForm = document.querySelector('.search-form');
-const searchBox = document.querySelector('#search-box');
 
-document.querySelector('#search-button').onclick = (e) => {
-  searchForm.classList.toggle('active');
+function changeQuantity(id, quantity) {
+  let item = listCards.find((item) => item.id === id);
+
+  if (item == null) {
+    console.log(`Item with id ${id} does not exist in listCards.`);
+    return;
+  }
+
+  if (quantity == 0) {
+    listCards = listCards.filter((item) => item.id !== id);
+  } else {
+    item.quantity = quantity;
+    item.price = quantity * item.basePrice; // Calculate the price based on the base price
+  }
+
+  reloadCart();
+}
+
+// active buat search form
+const searchForm = document.querySelector(".search-form");
+const searchBox = document.querySelector("#search-box");
+
+document.querySelector("#search-button").onclick = (e) => {
+  searchForm.classList.toggle("active");
   searchBox.focus();
   e.preventDefault();
 };
