@@ -1,6 +1,6 @@
 :root {
-  --primary: #b6895b;
-  --bg: #010101;
+  --primary: #A18668;
+  --bg: #4B2E1E;
 }
 
 * {
@@ -182,7 +182,7 @@ body {
   flex-direction: column;
   gap: 20px;
   margin-top: 50px;
-  overflow-y: auto; /* ini biar kalo banyak item bisa di scroll */
+  overflow-y: auto;
   height: 100vh;
 }
 
@@ -210,7 +210,7 @@ body {
 }
 
 .list-card .buttons button {
-  background-color: #b6895b;
+  background-color: var(--primary);
   color: white;
   border: none;
   padding: 5px 10px;
@@ -293,7 +293,7 @@ body {
 
   padding: 80px 0;
 
-  background-color: #010101;
+  background-color:var(--bg);
 }
 .btn {
   padding: 10px 40px;
@@ -348,7 +348,7 @@ body {
 .contact .row {
   display: flex;
   margin-top: 2rem;
-  background-color: #222;
+  background-color: var(--bg);
 }
 
 .contact .row .map {
