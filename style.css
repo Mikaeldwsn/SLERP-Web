@@ -440,7 +440,7 @@ body{
       position: absolute;
       top: 100%;
       right: -100%;
-      background-color: #fff;
+      background-color: #010101;
       width: 30rem;
       height: 100vh;
       transition: 0.3s;
@@ -451,7 +451,7 @@ body{
     }
   
     .navbar .navbar-nav a {
-      color: var(--bg);
+      color: #fff;
       display: block;
       margin: 1.5rem;
       padding: 0.5rem;
