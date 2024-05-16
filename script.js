@@ -75,6 +75,7 @@ function addToCart(id) {
     item.basePrice = product.price; // Store the base price
     listCards.push(item);
   } else {
+    item.price += item.basePrice; // Add the base price to the price
     item.quantity++;
   }
 
@@ -91,7 +92,7 @@ function reloadCart() {
   listCard.innerHTML = "";
 
   listCards.forEach((value) => {
-    totalPrice += value.price * value.quantity;
+    totalPrice += value.basePrice * value.quantity;
     count += value.quantity;
 
     let newDiv = document.createElement("li");
