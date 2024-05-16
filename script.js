@@ -112,6 +112,8 @@ function reloadCart() {
       </div></div>
     `;
     listCard.appendChild(newDiv);
+    const btns = document.getElementById('btns');
+
   });
 
   total.innerText = totalPrice.toLocaleString();
@@ -132,7 +134,6 @@ function changeQuantity(id, quantity) {
     item.quantity = quantity;
     item.price = quantity * item.basePrice; // Calculate the price based on the base price
   }
-
   reloadCart();
 }
 document.querySelector("#shoppingCart").onclick = (e) => {
@@ -149,3 +150,5 @@ document.querySelector("#search-button").onclick = (e) => {
   searchBox.focus();
   e.preventDefault();
 };
+
+
