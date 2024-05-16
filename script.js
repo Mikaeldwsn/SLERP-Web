@@ -1,8 +1,9 @@
 // Toggle class active buat hamburger menu
 const navbarNav = document.querySelector(".navbar-nav");
 // ketika hamburger menu di klik
-document.querySelector("#hamburger-menu").onclick = () => {
+document.querySelector("#hamburger-menu").onclick = (e) => {
   navbarNav.classList.toggle("active");
+  e.preventDefault();
 };
 
 //buat list cart
@@ -133,6 +134,10 @@ function changeQuantity(id, quantity) {
 
   reloadCart();
 }
+document.querySelector("#shoppingCart").onclick = (e) => {
+ 
+  e.preventDefault();
+};
 
 // active buat search form
 const searchForm = document.querySelector(".search-form");
