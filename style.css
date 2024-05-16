@@ -1,6 +1,6 @@
 :root {
-  --primary: #A18668;
-  --bg: #4B2E1E;
+  --primary: #a18668;
+  --bg: #4b2e1e;
 }
 
 * {
@@ -186,6 +186,7 @@ body {
 .list-card img {
   height: 100px;
   width: 300px;
+  object-fit: cover; /* biar gambarnya ga gepeng*/
 }
 
 .list-card .item {
@@ -288,7 +289,7 @@ body {
 
   padding: 80px 0;
 
-  background-color:var(--bg);
+  background-color: var(--bg);
 }
 .btn {
   padding: 10px 40px;
